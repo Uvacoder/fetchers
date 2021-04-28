@@ -4,6 +4,7 @@ import { apiFetchers } from "../utils/apiFetchers";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<any>([]);
 
   const fetchAllUser = async () => {
     setLoading(true);
@@ -13,8 +14,7 @@ export default function Home() {
       url: "https://reqres.in/api/users",
     });
 
-    console.log(res);
-
+    setData(res.responseData.data);
     setLoading(false);
   };
 
@@ -26,7 +26,7 @@ export default function Home() {
       <h1 className="text-4xl font-bold">Fetchers</h1>
       <h1 className="text-1xl font-semibold mt-5"> List of all users!</h1>
       <button onClick={fetchAllUser} className="button w-32 mt-5">
-        Fetch all users{" "}
+        Fetch all users
       </button>
 
       <div> {loading ? "Loading..." : ""} </div>
